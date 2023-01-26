@@ -50,3 +50,18 @@ URL: /api/question/create
 
 ##질문 등록 API 출력 항목
 없음
+
+
+##질문데이터 생성
+
+python 셀
+
+from database import SessionLocal
+from models import Question
+from datetiem import datetime
+
+db = SessionLocal()
+for i in range(300):
+      q = Question(subject="테스트입니다:[%03d]"%i, content='내용무', create_data=datetime.now())
+      db.add(q)
+db.commit()
