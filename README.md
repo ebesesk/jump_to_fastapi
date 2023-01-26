@@ -65,3 +65,15 @@ for i in range(300):
       q = Question(subject="테스트입니다:[%03d]"%i, content='내용무', create_data=datetime.now())
       db.add(q)
 db.commit()
+
+
+##스토어 변수 생성하기
+frontend/src/lib/store.js
+import { writable } from 'svelte/store'
+export const page = writable(0) # 초기값 0
+이전 페이지가 없으면 비활성   {page <= && 'disable'}
+이전 페이지 번호              page - 1
+다음 페이지가 없으면 비활성   {page >= total_page - 1 && 'disable'}
+다음 페이지 번호              page +1
+페이지 리스트 루프            {#each Array(total_page) as _, loop_page}
+현재 페이지와 같으면 활성화   {loop_page === page && 'active}
