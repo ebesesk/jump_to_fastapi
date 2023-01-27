@@ -77,3 +77,59 @@ export const page = writable(0) # 초기값 0
 다음 페이지 번호              page +1
 페이지 리스트 루프            {#each Array(total_page) as _, loop_page}
 현재 페이지와 같으면 활성화   {loop_page === page && 'active}
+
+
+##회원 가입
+
+
+회원 모델
+username    사용자이름(id)
+password    비밀번호
+email       이메일
+
+모델 작성후 alembic revision --autogenerate alembic upgrade head
+
+API
+API명:      회원가입
+URL:        /api/user/create
+요청방법:   post
+설명:       회원등록을 한다
+
+회원가입 API 입력 항목
+username, password1(비밀번호) password2(비밀번호확인) email
+
+회원 가입 API 출력 항목
+없음
+
+
+#로그인 API
+
+##로그인 API 명세
+API명       로그인
+URL         /api/user/login
+요청방법    post
+설명        로그인을 한다.
+
+
+로그인 스키마
+
+로그인 crud
+
+로그인 라우터
+
+로그인 API 테스트
+
+
+#로그인 화면 만들기
+
+로그인 라우터 등록하기
+
+로그인 화면 작성하기
+
+fastapi 함수 작성하기
+
+엑세스 토큰과 로그인 사용자명 저장하기
+
+내비게이션 바에 로그인 여부 표시하기
+
+로그아웃
