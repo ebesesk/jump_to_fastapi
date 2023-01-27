@@ -127,6 +127,8 @@ URL         /api/user/login
 로그인 화면 작성하기
 
 fastapi 함수 작성하기
+http request 헤더 Content-type 을 application/json -> application/x-www-form-urlencoded 로 변환
+qs패키지 설치
 
 엑세스 토큰과 로그인 사용자명 저장하기
 
