@@ -210,3 +210,26 @@ INFO  [alembic.runtime.migration] Running upgrade 87416c9d163d -> f77ce8f209c6, 
 2. 백엔드 API 호출시 헤더 정보에 액세스 토큰을 포함하여 요청
 3. 백엔드에서 액세스 토큰을 분석하여 사용자명 취득
 4. 사용자명으로 사용자 조회
+
+
+질문 수정
+
+질문수정 API 명세
+API명:      질문수정
+URL:        /api/question/update
+요청방법:   put
+설명        질문을 수정한다.
+
+질문 수정 API 입력 항목
+question_id:      수정할 질문의 고유번호
+subject:          수정할 질문의 제목 
+content:          수정할 질문의 내용
+
+질문 수정 API 출력 항목
+없음
+
+-질문 수정 스키마
+-질문 수정 crud
+-질문 수정 라우터
+-질문 수정 버튼 
+-질문 수정 화면
