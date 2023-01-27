@@ -202,3 +202,11 @@ INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
 INFO  [alembic.runtime.migration] Running upgrade 87416c9d163d -> f77ce8f209c6, empty message
 혹시 이 과정에서 오류가 발생할 경우에는 alembic stamp head 명령을 실행한 후에 다시 위의 과정을 반복해 보자.
+
+
+글쓴이 정보 가져오기
+
+1. 프론트엔드에서 로그인을 성공한 후에 엑세스 토큰을 저장
+2. 백엔드 API 호출시 헤더 정보에 액세스 토큰을 포함하여 요청
+3. 백엔드에서 액세스 토큰을 분석하여 사용자명 취득
+4. 사용자명으로 사용자 조회
