@@ -135,3 +135,70 @@ qs패키지 설치
 내비게이션 바에 로그인 여부 표시하기
 
 로그아웃
+
+
+sqlite 버그패치 
+
+[파일명: projects/myapi/database.py]
+
+from sqlalchemy import create_engine, MetaData
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
+
+(... 생략 ...)
+
+Base = declarative_base()
+naming_convention = {
+    "ix": 'ix_%(column_0_label)s',
+    "uq": "uq_%(table_name)s_%(column_0_name)s",
+    "ck": "ck_%(table_name)s_%(column_0_name)s",
+    "fk": "fk_%(table_name)s_%(column_0_name)s_%(referred_table_name)s",
+    "pk": "pk_%(table_name)s"
+}
+Base.metadata = MetaData(naming_convention=naming_convention)
+
+(... 생략 ...)
+
+
+
+[파일명: projects/myapi/migrations/env.py]
+
+(... 생략 ...)
+
+def run_migrations_offline() -> None:
+   (... 생략 ...)
+    url = config.get_main_option("sqlalchemy.url")
+    context.configure(
+        url=url,
+        target_metadata=target_metadata,
+        literal_binds=True,
+        dialect_opts={"paramstyle": "named"},
+        render_as_batch=True,
+    )
+
+    (... 생략 ...)
+
+def run_migrations_online() -> None:
+    (... 생략 ...)
+    with connectable.connect() as connection:
+        context.configure(
+            connection=connection,
+            target_metadata=target_metadata,
+            render_as_batch=True,
+        )
+
+        (... 생략 ...)
+
+
+
+(myapi) c:/projects/myapi> alembic revision --autogenerate
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.autogenerate.compare] Detected added unique constraint 'uq_user_email' on '['email']'
+INFO  [alembic.autogenerate.compare] Detected added unique constraint 'uq_user_username' on '['username']'
+  Generating /Users/pahkey/projects/myapi/migrations/versions/f77ce8f209c6_.py ...  done
+(myapi) c:/projects/myapi> alembic upgrade head          
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.runtime.migration] Running upgrade 87416c9d163d -> f77ce8f209c6, empty message
+혹시 이 과정에서 오류가 발생할 경우에는 alembic stamp head 명령을 실행한 후에 다시 위의 과정을 반복해 보자.
